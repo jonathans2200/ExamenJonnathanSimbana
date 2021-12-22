@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<html   xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <h:head>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"/>
+
+        <title>Hello, world!</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <h1>Creacion de un libro</h1>
+            <div class="row">
+                <div class="col col-md-5">
+                    <div class="card card-success">
+                        <div class="card card-header">
+                            <h2>Detalles del libro</h2>
+                        </div>
+                        <div class="card card-body">
+                            <div class="form-group">
+                                <label>Nombre:</label>
+                                <h:inputText size="30" class="form-control" value="#{libroBean.nombre}"/>
+                            </div>
+                            <div class="form-group">
+                                <label>ISBN:</label>
+                                <h:inputText size="30" class="form-control" value="#{libroBean.isbn}"/>
+                            </div>
+                            <div class="form-group">
+                                <label>ISBN:</label>
+                                <h:inputText size="30" class="form-control" value="#{libroBean.numPagina}"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col col-md-5">
+                    <div class="card card-success">
+                        <div class="card card-header">
+                            <h1>Capitulos</h1>
+                        </div>
+                        <div class="card card-body">
+                            <legend>Detalle Capitulo</legend>
+                            <hr></hr>
+                            
+                            <div class="form-group">
+                                <label>Titulo del capitulo:</label>
+                                <h:inputText  class="form-control" value="#{libroBean.titulo}" />
+                            </div>
+                            <div class="form-group">
+                                <label>Numero de capitulo:</label>
+                                <h:inputText  class="form-control" value="#{libroBean.numero}" />
+                            </div>
+                            <legend>Datos del Autor:</legend>
+                            <hr></hr>
+                            <label>Ingrese codigo autor:
+                            </label>
+                            <h:inputText id="cedGarante" value="#{libroBean.buscar}"  class="form-control" />
+                            <br />
+
+
+                            <h:commandButton action="#{libroBean.buscarAutor()}"
+                                             value="Buscar Autor"
+                                             class="btn btn-success btn btn-primary btn-lg ">
+                                <f:ajax render="cargado nombre" execute="cedGarante"  />
+                            </h:commandButton>
+
+                            <br /> <br />
+                            <h:panelGroup id="cargado">
+                                <div class="form-group">
+                                    <label>Nombre:</label>
+                                    <h:outputText id="nombre" class="form-control" value="#{libroBean.autor.nombre}" />
+                                </div>
+                                <div class="form-group">
+                                    <label> Apellido:</label>
+                                    <h:outputText class="form-control" value="#{libroBean.autor.nacionalidad}" />
+                                </div>
+
+
+
+                            </h:panelGroup>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+        </h:form>
+    </h:body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+
+</html>

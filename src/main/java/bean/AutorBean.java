@@ -14,6 +14,7 @@ import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.annotation.FacesConfig;
 import javax.inject.Named;
+import javax.persistence.Query;
 import model.Autor;
 
 /**
@@ -25,15 +26,16 @@ import model.Autor;
 @SessionScoped
 public class AutorBean implements Serializable {
 
+    private List<Autor> listar;
     private String nombre;
     private String nacionalidad;
-    private List<Autor> listaAutor;
+
     @EJB
     private AutorFacade ejbFacade;
 
     @PostConstruct
     public void init() {
-
+        listar = ejbFacade.findAll();
     }
 
     public AutorFacade getEjbFacade() {
@@ -60,12 +62,25 @@ public class AutorBean implements Serializable {
         this.nacionalidad = nacionalidad;
     }
 
-    public List<Autor> getListaAutor() {
-        return listaAutor;
+    public List<Autor> getListar() {
+        return listar;
     }
 
-    public void setListaAutor(List<Autor> listaAutor) {
-        this.listaAutor = listaAutor;
+    public void setListar(List<Autor> listar) {
+        this.listar = listar;
     }
+
+    public String crear() {
+
+        Autor a = new Autor();
+        a.setNombre(nombre);
+        a.setNacionalidad(nacionalidad);
+        ejbFacade.crear(a);
+        listar = ejbFacade.findAll();
+        return null;
+
+    }
+
+    
 
 }

@@ -5,6 +5,8 @@
  */
 package bean;
 
+import ejb.CapituloFacade;
+import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.annotation.FacesConfig;
 import javax.inject.Named;
@@ -16,7 +18,8 @@ import javax.inject.Named;
 @FacesConfig(version = FacesConfig.Version.JSF_2_3)
 @Named
 @SessionScoped
+public class CapituloBean implements java.io.Serializable {
 
-public class CapituloBean implements java.io.Serializable{
-    
+   
+
 }
