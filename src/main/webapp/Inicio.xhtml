@@ -78,23 +78,56 @@
                     <div class="card card-success">
                         <div class="card card-header">
                             <h2>Buscar:</h2>
+
+                        </div>
+                        <div class="card card-body">
                             <div class="form-group">
                                 <label>Buscar por Autor</label>
-                                <h:inputText size="30" class="form-control" value="#{libroBean.isbn}"/>
+                                <h:inputText size="30" class="form-control" value="#{autorBean.buscarNombre}"/>
                             </div>
                             <div class="form-group">
-                                <label>Buscar por Capituo</label>
-                                <h:inputText size="30" class="form-control" value="#{libroBean.isbn}"/>
+                                <label>Buscar por Capitulo</label>
+                                <h:inputText size="30" class="form-control" value="#{autorBean.buscarCapitulo}"/>
                             </div>
                         </div>
-                        <div class="card card-body"></div>
+                        <div class="card card-footer">
+                            <h:commandButton action="#{libroBean.buscarAutor()}"
+                                             value="Buscar Autor"
+                                             class="btn btn-success btn btn-primary btn-lg ">
+                                <f:ajax render="cargado nombre" execute="cedGarante"  />
+                            </h:commandButton>
+                        </div>
 
                     </div>
                 </div>
                 <div class="col col-md-5">
                     <div class="card card-success">
-                        <div class="card card-header"></div>
-                        <div class="card card-body"></div>
+                        <div class="card card-header">Resultado</div>
+                        <div class="card card-body">
+
+
+                            <br /> <br />
+                            <h:panelGroup id="cargado">
+                                <h:dataTable value="#{autorBean.listarLibro}" var="libro" class="table">
+                                    <h:column>
+                                        <f:facet name="header">Libro</f:facet>
+                                            #{libro.libro.nombre}
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">Capitulo</f:facet>
+                                            #{libro.titulo}
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">Autor</f:facet>
+                                            #{libro.autor.nombre}
+                                    </h:column>
+
+                                </h:dataTable>  
+
+
+
+                            </h:panelGroup>
+                        </div>
 
                     </div>
 

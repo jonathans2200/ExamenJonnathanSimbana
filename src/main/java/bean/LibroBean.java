@@ -32,13 +32,14 @@ public class LibroBean implements Serializable {
     @EJB
     private AutorFacade ejbAutor;
 
+    @EJB
+    private CapituloFacade ejbCapitulo;
+
     private String nombre;
     private String buscar;
     private int numPagina;
     private Autor autor;
     private String isbn;
-    @EJB
-    private CapituloFacade ejbCapitulo;
 
     private int numero;
     private String titulo;

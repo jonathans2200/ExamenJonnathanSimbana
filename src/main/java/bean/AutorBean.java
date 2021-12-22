@@ -6,6 +6,8 @@
 package bean;
 
 import ejb.AutorFacade;
+import ejb.CapituloFacade;
+import ejb.LibroFacade;
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -16,6 +18,8 @@ import javax.faces.annotation.FacesConfig;
 import javax.inject.Named;
 import javax.persistence.Query;
 import model.Autor;
+import model.Capitulo;
+import model.Libro;
 
 /**
  *
@@ -27,15 +31,34 @@ import model.Autor;
 public class AutorBean implements Serializable {
 
     private List<Autor> listar;
+    private List<Capitulo> listarLibro;
     private String nombre;
+    private String buscarNombre;
+    private String buscarCapitulo;
     private String nacionalidad;
 
     @EJB
     private AutorFacade ejbFacade;
 
+    @EJB
+    private LibroFacade ejblibro;
+
+    @EJB
+    private CapituloFacade ejbCapitulo;
+
     @PostConstruct
     public void init() {
+
         listar = ejbFacade.findAll();
+        listarLibro = ejbCapitulo.metodoBuscar2("inicio");
+    }
+
+    public void buscarNombre() {
+        if (buscarCapitulo != null && buscarNombre == null) {
+            listarLibro = ejbCapitulo.metodoBuscar2(buscarCapitulo);
+        } else if (buscarNombre != null && buscarCapitulo == null) {
+            listarLibro = ejbCapitulo.metodoBuscar(buscarNombre);
+        }
     }
 
     public AutorFacade getEjbFacade() {
@@ -54,6 +77,22 @@ public class AutorBean implements Serializable {
         this.nombre = nombre;
     }
 
+    public String getBuscarNombre() {
+        return buscarNombre;
+    }
+
+    public void setBuscarNombre(String buscarNombre) {
+        this.buscarNombre = buscarNombre;
+    }
+
+    public String getBuscarCapitulo() {
+        return buscarCapitulo;
+    }
+
+    public void setBuscarCapitulo(String buscarCapitulo) {
+        this.buscarCapitulo = buscarCapitulo;
+    }
+
     public String getNacionalidad() {
         return nacionalidad;
     }
@@ -62,8 +101,32 @@ public class AutorBean implements Serializable {
         this.nacionalidad = nacionalidad;
     }
 
+    public List<Capitulo> getListarLibro() {
+        return listarLibro;
+    }
+
+    public void setListarLibro(List<Capitulo> listarLibro) {
+        this.listarLibro = listarLibro;
+    }
+
+    public LibroFacade getEjblibro() {
+        return ejblibro;
+    }
+
+    public void setEjblibro(LibroFacade ejblibro) {
+        this.ejblibro = ejblibro;
+    }
+
     public List<Autor> getListar() {
         return listar;
+    }
+
+    public CapituloFacade getEjbCapitulo() {
+        return ejbCapitulo;
+    }
+
+    public void setEjbCapitulo(CapituloFacade ejbCapitulo) {
+        this.ejbCapitulo = ejbCapitulo;
     }
 
     public void setListar(List<Autor> listar) {
@@ -80,7 +143,5 @@ public class AutorBean implements Serializable {
         return null;
 
     }
-
-    
 
 }
