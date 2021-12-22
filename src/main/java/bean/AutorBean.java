@@ -32,6 +32,7 @@ public class AutorBean implements Serializable {
 
     private List<Autor> listar;
     private List<Capitulo> listarLibro;
+    private List<Capitulo> listarLibro1;
     private String nombre;
     private String buscarNombre;
     private String buscarCapitulo;
@@ -50,14 +51,22 @@ public class AutorBean implements Serializable {
     public void init() {
 
         listar = ejbFacade.findAll();
-        listarLibro = ejbCapitulo.metodoBuscar2("inicio");
+
+        buscarNombre();
+        // listarLibro = ejbCapitulo.metodoBuscar2("inicio");
     }
 
     public void buscarNombre() {
-        if (buscarCapitulo != null && buscarNombre == null) {
-            listarLibro = ejbCapitulo.metodoBuscar2(buscarCapitulo);
-        } else if (buscarNombre != null && buscarCapitulo == null) {
+
+        if (buscarNombre != null) {
             listarLibro = ejbCapitulo.metodoBuscar(buscarNombre);
+        }
+    }
+
+    public void buscarCapitulo() {
+
+        if (buscarNombre != null) {
+            listarLibro1 = ejbCapitulo.metodoBuscar2(buscarCapitulo);
         }
     }
 
@@ -142,6 +151,14 @@ public class AutorBean implements Serializable {
         listar = ejbFacade.findAll();
         return null;
 
+    }
+
+    public List<Capitulo> getListarLibro1() {
+        return listarLibro1;
+    }
+
+    public void setListarLibro1(List<Capitulo> listarLibro1) {
+        this.listarLibro1 = listarLibro1;
     }
 
 }

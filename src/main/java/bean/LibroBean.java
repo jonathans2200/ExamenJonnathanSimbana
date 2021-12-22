@@ -9,12 +9,16 @@ import ejb.AutorFacade;
 import ejb.CapituloFacade;
 import ejb.LibroFacade;
 import java.io.Serializable;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.annotation.FacesConfig;
 import javax.inject.Named;
 import model.Autor;
+import model.Capitulo;
 import model.Libro;
 
 /**
@@ -39,6 +43,7 @@ public class LibroBean implements Serializable {
     private String buscar;
     private int numPagina;
     private Autor autor;
+    private List<Capitulo> capitulos;
     private String isbn;
 
     private int numero;
@@ -46,7 +51,7 @@ public class LibroBean implements Serializable {
 
     @PostConstruct
     public void init() {
-
+        capitulos = new ArrayList<Capitulo>();
     }
 
     public String crear() {
@@ -142,4 +147,39 @@ public class LibroBean implements Serializable {
         this.titulo = titulo;
     }
 
+    public String crearLibro() {
+
+        Libro libro = new Libro();
+
+        libro.setNombre(nombre);
+        libro.setIsbn(isbn);
+        libro.setNumPagina(numPagina);
+        ejbLibro.crear(libro);
+
+        Capitulo cap = new Capitulo();
+
+        for (int i = 0; i < capitulos.size(); i++) {
+            cap.setTitulo(capitulos.get(i).getTitulo());
+            cap.setNumero(capitulos.get(i).getNumero());
+            cap.setAutor(capitulos.get(i).getAutor());
+            cap.setLibro(libro);
+            ejbCapitulo.crear(cap);
+        }
+
+        return null;
+    }
+
+    public void add() {
+
+        Capitulo cap = new Capitulo();
+        cap.setNumero(numero);
+        cap.setTitulo(titulo);
+        cap.setAutor(autor);
+
+        capitulos.add(cap);
+
+        for (int i = 0; i < capitulos.size(); i++) {
+            System.out.println(capitulos.get(i).getTitulo());
+        }
+    }
 }

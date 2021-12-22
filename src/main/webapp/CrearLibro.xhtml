@@ -29,7 +29,7 @@
                                 <h:inputText size="30" class="form-control" value="#{libroBean.isbn}"/>
                             </div>
                             <div class="form-group">
-                                <label>ISBN:</label>
+                                <label>Numero de Paginas:</label>
                                 <h:inputText size="30" class="form-control" value="#{libroBean.numPagina}"/>
                             </div>
                         </div>
@@ -42,8 +42,9 @@
                         </div>
                         <div class="card card-body">
                             <legend>Detalle Capitulo</legend>
+                            <h:commandButton value="ADD" action="#{libroBean.add()}"></h:commandButton>
                             <hr></hr>
-                            
+
                             <div class="form-group">
                                 <label>Titulo del capitulo:</label>
                                 <h:inputText  class="form-control" value="#{libroBean.titulo}" />
@@ -86,8 +87,12 @@
                     </div>
                 </div>
             </div>
-
-
+            <br></br>
+            <br></br>
+            <br></br>
+            <div class="row">
+                <h:commandButton class="btn btn-lg btn-success"  action="#{libroBean.crearLibro()}" value="Guardar Libro"></h:commandButton>
+            </div>
         </h:form>
     </h:body>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
